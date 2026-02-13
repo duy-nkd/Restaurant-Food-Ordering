@@ -12,7 +12,6 @@ export default function Cart() {
   const [appliedVoucher, setAppliedVoucher] = useState(null);
   const [voucherDiscount, setVoucherDiscount] = useState(0);
   const [showVoucherDialog, setShowVoucherDialog] = useState(false);
-  const [showVoucherList, setShowVoucherList] = useState(false);
   const [message, setMessage] = useState("");
   const [confirmDialog, setConfirmDialog] = useState(null);
   const [showPaymentDialog, setShowPaymentDialog] = useState(false);
@@ -62,14 +61,7 @@ export default function Cart() {
     }
   };
 
-  const loadVouchers = async () => {
-    try {
-      const response = await axios.get(`${API_URL}/vouchers/valid`);
-      setAvailableVouchers(response.data);
-    } catch (error) {
-      console.error("Error loading vouchers:", error);
-    }
-  };
+
 
   const updateQuantity = async (orderDetail, newQuantity) => {
     if (newQuantity < 1) return;
@@ -199,7 +191,6 @@ export default function Cart() {
       if (response.data.valid) {
         setAppliedVoucher(response.data.voucher);
         setVoucherDiscount(response.data.discount);
-        setShowVoucherList(false);
         setMessage(response.data.message || "Áp dụng voucher thành công!");
       } else {
         setMessage(response.data.message || "Voucher không hợp lệ!");
@@ -213,7 +204,6 @@ export default function Cart() {
   const removeVoucher = () => {
     setAppliedVoucher(null);
     setVoucherDiscount(0);
-    setShowVoucherList(false);
   };
 
   const confirmOrder = async () => {
@@ -594,7 +584,6 @@ export default function Cart() {
                 <button
                   onClick={() => {
                     setShowVoucherDialog(false);
-                    setShowVoucherList(false);
                     setAppliedVoucher(null);
                     setVoucherDiscount(0);
                   }}

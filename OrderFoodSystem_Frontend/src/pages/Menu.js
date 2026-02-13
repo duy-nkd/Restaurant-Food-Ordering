@@ -24,6 +24,7 @@ export default function Menu() {
     if (customer) {
       loadWishlist();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const loadProducts = async () => {

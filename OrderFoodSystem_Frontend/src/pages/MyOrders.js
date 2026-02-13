@@ -22,6 +22,7 @@ export default function MyOrders() {
       return;
     }
     loadOrders();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Auto-clear message after 3 seconds (same as Wishlist)

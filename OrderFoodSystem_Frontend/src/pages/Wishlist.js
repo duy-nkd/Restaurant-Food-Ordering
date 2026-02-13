@@ -18,6 +18,7 @@ export default function Wishlist() {
       return;
     }
     loadWishlist();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const loadWishlist = async () => {

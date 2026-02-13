@@ -18,6 +18,7 @@ export default function StaffDashboard() {
       return;
     }
     loadOrders();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const loadOrders = async () => {
