@@ -80,17 +80,22 @@ public class VNPayService {
     }
 
     public boolean verifyPayment(Map<String, String> params) {
+        System.out.println("=== Verifying VNPay Payment ===");
         String vnp_SecureHash = params.get("vnp_SecureHash");
-        params.remove("vnp_SecureHash");
-        params.remove("vnp_SecureHashType");
+        System.out.println("Received SecureHash: " + vnp_SecureHash);
+        
+        // Create a copy to avoid modifying the original
+        Map<String, String> paramsCopy = new HashMap<>(params);
+        paramsCopy.remove("vnp_SecureHash");
+        paramsCopy.remove("vnp_SecureHashType");
 
-        List<String> fieldNames = new ArrayList<>(params.keySet());
+        List<String> fieldNames = new ArrayList<>(paramsCopy.keySet());
         Collections.sort(fieldNames);
         StringBuilder hashData = new StringBuilder();
         Iterator<String> itr = fieldNames.iterator();
         while (itr.hasNext()) {
             String fieldName = itr.next();
-            String fieldValue = params.get(fieldName);
+            String fieldValue = paramsCopy.get(fieldName);
             if ((fieldValue != null) && (fieldValue.length() > 0)) {
                 hashData.append(fieldName);
                 hashData.append('=');
@@ -105,8 +110,12 @@ public class VNPayService {
             }
         }
 
+        System.out.println("Hash data string: " + hashData.toString());
         String signValue = hmacSHA512(vnPayConfig.getHashSecret(), hashData.toString());
-        return signValue.equals(vnp_SecureHash);
+        System.out.println("Calculated SecureHash: " + signValue);
+        boolean isValid = signValue.equals(vnp_SecureHash);
+        System.out.println("Signature valid: " + isValid);
+        return isValid;
     }
 
     private String hmacSHA512(String key, String data) {

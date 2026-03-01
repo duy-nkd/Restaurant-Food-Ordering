@@ -12,25 +12,31 @@ const PaymentResult = () => {
     useEffect(() => {
         const verifyPayment = async () => {
             try {
-                console.log("=== Payment Result ===");
-                console.log("All params:", Object.fromEntries(searchParams));
+                console.log("=== Payment Result Frontend ===");
+                console.log("All URL params:", Object.fromEntries(searchParams));
                 
                 // Gọi backend để verify payment với tất cả params từ VNPay
                 const queryString = searchParams.toString();
-                console.log("Query string:", queryString);
+                console.log("Query string to send:", queryString);
                 
-                const response = await axios.get(`${API_URL}/api/payment/vnpay/return?${queryString}`);
-                console.log("Backend response:", response.data);
+                const apiUrl = `${API_URL}/api/payment/vnpay/return?${queryString}`;
+                console.log("Calling API:", apiUrl);
+                
+                const response = await axios.get(apiUrl);
+                console.log(" Backend response:", response.data);
                 
                 if (response.data.status === 'success') {
+                    console.log(" Payment SUCCESS - Order #" + response.data.orderId);
                     setPaymentData(response.data);
                     setStatus('success');
                 } else {
+                    console.log(" Payment FAILED:", response.data.message);
                     setPaymentData(response.data);
                     setStatus('failure');
                 }
             } catch (error) {
-                console.error("Error verifying payment:", error);
+                console.error(" Error verifying payment:", error);
+                console.error("Error details:", error.response?.data);
                 setStatus('failure');
             }
         };

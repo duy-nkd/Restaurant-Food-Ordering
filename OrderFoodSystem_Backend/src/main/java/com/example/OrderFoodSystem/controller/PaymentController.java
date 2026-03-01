@@ -51,9 +51,10 @@ public class PaymentController {
         Map<String, Object> response = new HashMap<>();
         
         System.out.println("=== VNPay Return URL ===");
-        System.out.println("Params: " + params);
+        System.out.println("All params: " + params);
         
         boolean isValid = vnPayService.verifyPayment(params);
+        System.out.println("Signature valid: " + isValid);
         
         if (isValid) {
             String responseCode = params.get("vnp_ResponseCode");
@@ -63,13 +64,19 @@ public class PaymentController {
             String bankCode = params.get("vnp_BankCode");
             String payDate = params.get("vnp_PayDate");
             
+            System.out.println("Response Code: " + responseCode);
+            System.out.println("TxnRef: " + txnRef);
+            
             if ("00".equals(responseCode)) {
                 // Thanh toán thành công - Cập nhật trạng thái đơn hàng
                 try {
                     // Parse orderId từ txnRef (format: orderId_timestamp hoặc chỉ orderId)
-                    Long orderId = Long.parseLong(txnRef.split("_")[0]);
+                    String orderIdStr = txnRef.contains("_") ? txnRef.split("_")[0] : txnRef;
+                    Long orderId = Long.parseLong(orderIdStr);
+                    
+                    System.out.println("=== Confirming payment for Order #" + orderId + " ===");
                     orderService.confirmPayment(orderId);
-                    System.out.println("Order #" + orderId + " payment confirmed");
+                    System.out.println(" Order #" + orderId + " payment confirmed successfully!");
                     
                     response.put("status", "success");
                     response.put("message", "Thanh toán thành công");
@@ -79,19 +86,27 @@ public class PaymentController {
                     response.put("amount", Long.parseLong(amount) / 100); // Chia 100 để lấy số tiền gốc
                     response.put("bankCode", bankCode);
                     response.put("payDate", payDate);
+                } catch (NumberFormatException e) {
+                    System.err.println(" Error parsing orderId from txnRef: " + txnRef);
+                    e.printStackTrace();
+                    response.put("status", "error");
+                    response.put("message", "Lỗi parse orderId: " + e.getMessage());
                 } catch (Exception e) {
-                    System.err.println("Error updating order: " + e.getMessage());
+                    System.err.println(" Error updating order: " + e.getMessage());
+                    e.printStackTrace();
                     response.put("status", "error");
                     response.put("message", "Lỗi cập nhật đơn hàng: " + e.getMessage());
                 }
             } else {
                 // Thanh toán thất bại
                 try {
-                    Long orderId = Long.parseLong(txnRef.split("_")[0]);
+                    String orderIdStr = txnRef.contains("_") ? txnRef.split("_")[0] : txnRef;
+                    Long orderId = Long.parseLong(orderIdStr);
                     orderService.failPayment(orderId, "VNPay response code: " + responseCode);
-                    System.out.println("Order #" + orderId + " payment failed");
+                    System.out.println("Order #" + orderId + " payment failed with code: " + responseCode);
                 } catch (Exception e) {
                     System.err.println("Error updating failed order: " + e.getMessage());
+                    e.printStackTrace();
                 }
                 
                 response.put("status", "failed");
@@ -99,10 +114,12 @@ public class PaymentController {
                 response.put("responseCode", responseCode);
             }
         } else {
+            System.err.println(" Invalid signature!");
             response.put("status", "error");
             response.put("message", "Chữ ký không hợp lệ");
         }
         
+        System.out.println("=== Response: " + response + " ===");
         return ResponseEntity.ok(response);
     }
 
