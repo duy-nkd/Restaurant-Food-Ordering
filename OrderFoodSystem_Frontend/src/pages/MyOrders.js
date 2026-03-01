@@ -97,12 +97,12 @@ export default function MyOrders() {
 
   const getStatusInfo = (status) => {
     switch (status) {
-      case 'confirmed': return { label: 'Đã nhận đơn', color: 'bg-blue-300', raw: '#4dabf7', icon: '📋', step: 1 };
-      case 'preparing': return { label: 'Đang chuẩn bị', color: 'bg-purple-300', raw: '#a78bfa', icon: '🍳', step: 2 };
-      case 'ready': return { label: 'Sẵn sàng giao', color: 'bg-green-400', raw: '#51cf66', icon: '🥡', step: 3 };
-      case 'delivered': return { label: 'Đã giao thành công', color: 'bg-emerald-500', raw: '#12b886', icon: '🏠', step: 4 };
-      case 'cancelled': return { label: 'Đã hủy', color: 'bg-red-400', raw: '#ff6b6b', icon: '❌', step: 0 };
-      default: return { label: 'Chờ xác nhận', color: 'bg-gray-400', raw: '#868e96', icon: '⏳', step: 0 };
+      case 'confirmed': return { label: 'Đã nhận đơn', color: 'bg-blue-300', raw: '#4dabf7',  step: 1 };
+      case 'preparing': return { label: 'Đang chuẩn bị', color: 'bg-purple-300', raw: '#a78bfa', step: 2 };
+      case 'ready': return { label: 'Sẵn sàng giao', color: 'bg-green-400', raw: '#51cf66',  step: 3 };
+      case 'delivered': return { label: 'Đã giao thành công', color: 'bg-emerald-500', raw: '#12b886',  step: 4 };
+      case 'cancelled': return { label: 'Đã hủy', color: 'bg-red-400', raw: '#ff6b6b',  step: 0 };
+      default: return { label: 'Chờ xác nhận', color: 'bg-gray-400', raw: '#868e96',  step: 0 };
     }
   };
 
@@ -219,10 +219,10 @@ export default function MyOrders() {
                             <p className="text-sm mb-0">
                               <strong>Phương thức thanh toán:</strong>{' '}
                               <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs font-semibold">
-                                {order.paymentMethod === 'COD' && '💵 Thanh toán khi nhận hàng (COD)'}
-                                {order.paymentMethod === 'BANK_TRANSFER' && '🏦 Chuyển khoản ngân hàng'}
-                                {order.paymentMethod === 'CREDIT_CARD' && '💳 Thẻ tín dụng/Ghi nợ'}
-                                {order.paymentMethod === 'E_WALLET' && '📱 Ví điện tử'}
+                                {order.paymentMethod === 'COD' && 'Thanh toán khi nhận hàng (COD)'}
+                                {order.paymentMethod === 'BANK_TRANSFER' && 'Chuyển khoản ngân hàng'}
+                                {order.paymentMethod === 'CREDIT_CARD' && 'Thẻ tín dụng/Ghi nợ'}
+                                {order.paymentMethod === 'E_WALLET' && 'Ví điện tử'}
                                 {!['COD', 'BANK_TRANSFER', 'CREDIT_CARD', 'E_WALLET'].includes(order.paymentMethod) && order.paymentMethod}
                               </span>
                             </p>

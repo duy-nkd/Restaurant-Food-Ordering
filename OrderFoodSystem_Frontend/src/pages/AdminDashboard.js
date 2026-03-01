@@ -683,10 +683,10 @@ export default function AdminDashboard() {
                           </svg>
                           <span className="font-medium">PT thanh toán:</span>{' '}
                           <span className="px-2 py-0.5 bg-blue-100 text-blue-800 rounded text-xs font-semibold">
-                            {order.paymentMethod === 'COD' && '💵 COD'}
-                            {order.paymentMethod === 'BANK_TRANSFER' && '🏦 Chuyển khoản'}
-                            {order.paymentMethod === 'CREDIT_CARD' && '💳 Thẻ'}
-                            {order.paymentMethod === 'E_WALLET' && '📱 Ví điện tử'}
+                            {order.paymentMethod === 'COD' && 'COD'}
+                            {order.paymentMethod === 'BANK_TRANSFER' && 'Chuyển khoản ngân hàng'}
+                            {order.paymentMethod === 'CREDIT_CARD' && 'Thẻ tín dụng/Ghi nợ'}
+                            {order.paymentMethod === 'E_WALLET' && 'Ví điện tử'}
                             {!['COD', 'BANK_TRANSFER', 'CREDIT_CARD', 'E_WALLET'].includes(order.paymentMethod) && order.paymentMethod}
                           </span>
                         </div>
