@@ -240,9 +240,9 @@ export default function MyOrders() {
                                 order.paymentStatus === 'FAILED' ? 'bg-red-100 text-red-800' :
                                 'bg-gray-100 text-gray-800'
                               }`}>
-                                {order.paymentStatus === 'PAID' && '✅ Đã thanh toán'}
-                                {order.paymentStatus === 'UNPAID' && '⏳ Chưa thanh toán'}
-                                {order.paymentStatus === 'FAILED' && '❌ Thanh toán thất bại'}
+                                {order.paymentStatus === 'PAID' && 'Đã thanh toán'}
+                                {order.paymentStatus === 'UNPAID' && ' Chưa thanh toán'}
+                                {order.paymentStatus === 'FAILED' && ' Thanh toán thất bại'}
                                 {!['PAID', 'UNPAID', 'FAILED'].includes(order.paymentStatus) && order.paymentStatus}
                               </span>
                             </p>

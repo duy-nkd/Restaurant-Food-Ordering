@@ -148,7 +148,7 @@ export default function Wishlist() {
                             src={item.product.imageUrl}
                             alt={item.product.nameProduct}
                             className="w-16 h-16 object-cover rounded shadow-sm"
-                            onError={(e) => { e.target.src = 'https://via.placehold.co/100?text=No+Image'; }}
+                            onError={(e) => { e.target.style.display = 'none'; }}
                           />
                         )}
                         <span>{item.product?.nameProduct}</span>

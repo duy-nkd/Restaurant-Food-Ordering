@@ -157,10 +157,10 @@ export default function StaffDashboard() {
                       <span className="text-sm">
                         <strong>PT thanh toán:</strong>{' '}
                         <span className="px-2 py-0.5 bg-blue-100 text-blue-800 rounded text-xs font-semibold">
-                          {order.paymentMethod === 'COD' && '💵 COD'}
-                          {order.paymentMethod === 'BANK_TRANSFER' && '🏦 Chuyển khoản'}
-                          {order.paymentMethod === 'CREDIT_CARD' && '💳 Thẻ'}
-                          {order.paymentMethod === 'E_WALLET' && '📱 Ví điện tử'}
+                          {order.paymentMethod === 'COD' && ' COD'}
+                          {order.paymentMethod === 'BANK_TRANSFER' && ' Chuyển khoản'}
+                          {order.paymentMethod === 'CREDIT_CARD' && ' Thẻ'}
+                          {order.paymentMethod === 'E_WALLET' && ' Ví điện tử'}
                           {!['COD', 'BANK_TRANSFER', 'CREDIT_CARD', 'E_WALLET'].includes(order.paymentMethod) && order.paymentMethod}
                         </span>
                       </span>
@@ -176,9 +176,9 @@ export default function StaffDashboard() {
                           order.paymentStatus === 'FAILED' ? 'bg-red-100 text-red-800' :
                           'bg-gray-100 text-gray-800'
                         }`}>
-                          {order.paymentStatus === 'PAID' && '✅ Đã thanh toán'}
-                          {order.paymentStatus === 'UNPAID' && '⏳ Chưa thanh toán'}
-                          {order.paymentStatus === 'FAILED' && '❌ Thất bại'}
+                          {order.paymentStatus === 'PAID' && ' Đã thanh toán'}
+                          {order.paymentStatus === 'UNPAID' && ' Chưa thanh toán'}
+                          {order.paymentStatus === 'FAILED' && ' Thất bại'}
                           {!['PAID', 'UNPAID', 'FAILED'].includes(order.paymentStatus) && order.paymentStatus}
                         </span>
                       </span>
