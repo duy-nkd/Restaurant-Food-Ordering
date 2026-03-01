@@ -226,7 +226,7 @@ export default function Menu() {
                     src={p.imageUrl}
                     alt={p.nameProduct}
                     className="w-full h-40 sm:h-48 object-cover rounded-lg mb-3"
-                    onError={(e) => { e.target.src = 'https://via.placeholder.co/300x200?text=No+Image'; }}
+                    onError={(e) => { e.target.src = 'https://via.placehold.co/300x200?text=No+Image'; }}
                   />
                 )}
                 <h4 className="mb-2 font-semibold text-base sm:text-lg text-indigo-900">{p.nameProduct}</h4>

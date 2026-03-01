@@ -106,7 +106,7 @@ const Chatbot = () => {
                                                         src={p.imageUrl}
                                                         alt={p.nameProduct}
                                                         className="w-12 h-12 object-cover rounded"
-                                                        onError={(e) => { e.target.src = 'https://via.placeholder.co/50'; }}
+                                                        onError={(e) => { e.target.src = 'https://via.placehold.co/50'; }}
                                                     />
                                                     <div className="flex-1">
                                                         <h5 className="text-[12px] font-bold text-gray-800 line-clamp-1">{idx + 1}. {p.nameProduct}</h5>
