@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from './layout/Navbar';
 import Home from './pages/Home';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import AddCustomer from './components/AddCustomer';
 import EditCustomer from './components/EditCustomer';
 
@@ -57,6 +58,7 @@ function App() {
         <Footer />
         <GoToTop />
         <Chatbot />
+        <SpeedInsights />
       </Router>
     </div>
   );
